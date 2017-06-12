@@ -6,25 +6,15 @@ function Jukebox() {
 	const MAX_VOLUME = 1; // max
 	const STATUS = ["WAITING","PLAYING","PAUSED"];
 
-	this.songs = [];
-	this.last_song = -1;
-	this.current_song_index = 0;
 	this.current_song_time = 0;
 	this.current_song_duration = 0;
 	this.volume = DEFAULT_VOLUME;
 	this.status = STATUS[0];
 
-	this.getSongList = function(){
-		
-	}
-
 	this.playSong = function() {
 		// play song indicated by user
 		// set current song index to index of this song
 		if(this.status == STATUS[0]){ //WAITING
-			$('#currentSong').attr({
-				"src" : this.songs[this.current_song_index].source
-			});
 			$('#currentSong').prop('volume',this.volume);
 			$('#currentSong').trigger('play'); 
 			// update status 
@@ -53,7 +43,7 @@ function Jukebox() {
 		// drops song, sets status to WAITING
 		if(this.status != STATUS[0]){ //if state is either PLAYING or PAUSED
 			this.pauseSong();
-			this.current_song_time = 0;
+			$('#currentSong')[0].currentTime = 0;
 			this.status = STATUS[0]; //WAITING
 		}
 		console.log(this.status);
@@ -61,24 +51,12 @@ function Jukebox() {
 
 	this.nextSong = function() {
 		// skips rest of current song and begins to play next song in list
-		if(this.current_song_index == this.songs.length - 1){
-			this.current_song_index = 0;
-			this.playSong();
-		}else{
-			this.current_song_index += 1;
-			this.playSong();
-		}
+		//rewrite
 	}
 
 	this.previousSong = function() {
 		// plays previous song in list
-		if(this.current_song_index == 0){
-			this.current_song_index = this.songs.length - 1;
-			this.playSong();
-		}else{
-			this.current_song_index -= 1;
-			this.playSong();
-		}
+		//rewrite
 	}
 
 	this.volUp = function() {
@@ -102,42 +80,19 @@ function Jukebox() {
 	}
 
 	this.loop = function(value) {
-		if(value == 1){//loop current song only
-			$('#currentSong').prop('loop',true);
-		}else if(value == 9){//loop entire playlist
-			$('#currentSong').prop('loop',false);
-			if(this.current_song_time == this.current_song_duration){ //if current song is done
-				this.nextSong();
-			}
-		}
+		//rewrite
 	}
-}
-
-function Song(source,title) {
-
-	const DEFAULT_IMG = null; //some default img later
-
-	this.source = source;
-	this.title = title;
-	
-}
-
-function getSongName(song) {
-	name = song.split("").reverse().join("");
-	index = name.indexOf('\\');
-	name = name.substring(0,index).split("").reverse().join("");
-	return name;
 }
 
 
 $(document).ready(() => {
 
-	$('#controls').hide();
-
 	let jb = new Jukebox();
 
 	$('#select_song').change(() => {
-		jb.current_song_index = $('#select_song').val();
+		$('#currentSong').attr({
+			'src' : $('#select_song').val()
+		});
 	});
 
 	$('#currentSong').on('loadedmetadata',() => {
@@ -171,14 +126,6 @@ $(document).ready(() => {
 
 	$('#play').click(() => {
 		jb.playSong();
-	});
-	$('#currentSong').on('error',(e) => {
-		switch(e.target.error.code){
-			case e.target.error.MEDIA_ERR_SRC_NOT_SUPPORTED:
-				showErr();
-				jb.removeSong();
-				break;
-		}
 	});
 
 	$('#pause').click(() => {

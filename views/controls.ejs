@@ -1,0 +1,17 @@
+<div id="controls">
+	<select id="select_song">
+		<% for(let i = 0; i< list.length; i++){ %>
+		<option> <%= list[i] %> </option>
+		<% } %>
+	</select>
+	<button id="play">Play</button>
+	<button id="pause">Pause</button>
+	<button id="stop">Stop</button>
+	<button id="next">Next</button>
+	<button id="previous">Previous</button>
+	<button id="vol_up">Volume Up</button>
+	<button id="vol_down">Volume Down</button>
+	<input type="radio" name="rd" value="1" />Loop Song
+	<input type="radio" name="rd" value="9" />Loop Playlist<br />
+	<span id="current">0:00</span>/<span id="duration">0:00</span>
+</div>
