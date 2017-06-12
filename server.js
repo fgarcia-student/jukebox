@@ -1,13 +1,13 @@
 let express = require('express');
-let multer = require('multer');
 let path = require('path');
 
 let app = express();
 app.use(express.static('public'));
-app.use(multer({dest: './uploads'}).array('song',1));
+app.use(express.static('songs'));
 
-app.post('/',(req,res) => {
-	console.log(req.files);
+app.get('/songs/',(req,res) => {
+	let name = req.query.songName;
+	res.sendFile(path.join(__dirname,`/songs/${name}`));
 });
 
 app.listen('3000',() => {

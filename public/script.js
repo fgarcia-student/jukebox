@@ -14,6 +14,10 @@ function Jukebox() {
 	this.volume = DEFAULT_VOLUME;
 	this.status = STATUS[0];
 
+	this.getSongList = function(){
+		
+	}
+
 	this.playSong = function() {
 		// play song indicated by user
 		// set current song index to index of this song
@@ -97,28 +101,6 @@ function Jukebox() {
 		console.log(this.volume);
 	}
 
-	this.addSong = function(song) {
-		// add song object to song list
-		this.songs.push(song);
-		this.last_song++;
-		index = this.last_song;
-		$('#select_song').append(`<option value=${index}>${song.title}</option>`);
-	}
-
-	this.removeSong = function() {
-		//find song in list, store index
-		let index = $('#select_song').val();
-		if (index == this.current_song_index){
-			this.stopSong();
-		}
-		$(`#select_song option[value=${index}]`).remove();
-		this.last_song--;
-		if(this.last_song == -1){
-			$('#controls').hide();
-		}
-
-	}
-
 	this.loop = function(value) {
 		if(value == 1){//loop current song only
 			$('#currentSong').prop('loop',true);
@@ -138,6 +120,13 @@ function Song(source,title) {
 	this.source = source;
 	this.title = title;
 	
+}
+
+function getSongName(song) {
+	name = song.split("").reverse().join("");
+	index = name.indexOf('\\');
+	name = name.substring(0,index).split("").reverse().join("");
+	return name;
 }
 
 
@@ -178,19 +167,6 @@ $(document).ready(() => {
 
 	$('#vol_down').click(() => {
 		jb.volDown();
-	});
-
-	$('#add').click(() => {
-		//rewrite, file coming from server now
-		// PATH = 'file:///' + $('#path').val() + "\\";
-		// $('#controls').show();
-		// let trimmed = trimSongPath(PATH,$('#song_pick').val());
-		// newSong = new Song(trimmed[0],trimmed[1]);
-		// jb.addSong(newSong);
-	});
-
-	$('#remove').click(() => {
-		jb.removeSong();
 	});
 
 	$('#play').click(() => {
