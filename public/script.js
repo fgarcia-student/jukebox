@@ -50,13 +50,23 @@ function Jukebox() {
 	}
 
 	this.nextSong = function() {
-		// skips rest of current song and begins to play next song in list
-		//rewrite
+		$('#select_song > option:selected').prop({
+			'selected' : false
+		}).next().prop({
+			'selected' : true
+		});
+		updateCurrentSong();
+		this.playSong();
 	}
 
 	this.previousSong = function() {
-		// plays previous song in list
-		//rewrite
+		$('#select_song > option:selected').prop({
+			'selected' : false
+		}).prev().prop({
+			'selected' : true
+		});
+		updateCurrentSong();
+		this.playSong();		
 	}
 
 	this.volUp = function() {
@@ -84,22 +94,29 @@ function Jukebox() {
 	}
 }
 
+function updateCurrentSong() {
+	$('#currentSong').attr({
+		'src' : $('#select_song').val()
+	});
+}
+
 
 $(document).ready(() => {
 
 	let jb = new Jukebox();
 
 	$('#select_song').change(() => {
-		$('#currentSong').attr({
-			'src' : $('#select_song').val()
-		});
+		updateCurrentSong();
 	});
 
 	$('#remove').click(() => {
 		let remove = $('#select_song').val();
 		$.ajax({
 			type: 'DELETE',
-			url: `/delete?songName=${remove}`
+			url: `/delete?songName=${remove}`,
+			success: function(res) {
+				window.location.href = '/';
+			}
 		})
 	});
 

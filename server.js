@@ -13,6 +13,12 @@ app.use(express.static('public'));
 app.use(express.static('songs'));
 app.use(fileUpload());
 
+fs.readdir('songs', (err,files) => {
+	files.forEach((file) => {
+		list.push(file);
+	});
+});	
+
 app.post('/upload', (req,res) => {
 	if(!req.files){
 		res.status(400).send('No files uploaded');
@@ -24,18 +30,23 @@ app.post('/upload', (req,res) => {
 		if(err){
 			return res.status(500).send(err);
 		}
+		list.push(newSongName);
 		console.log('added');
 		res.redirect('/');
 	});
 });
 
 app.delete('/delete', (req,res) => {
-	if(fs.unlink(path.join(__dirname,'songs',req.query.songName))){
+	let songName = req.query.songName;
+	fs.unlink(`./songs/${songName}`,(err) => {
+		if(err){
+			return res.status(500).send(err);
+		}
+		let index = list.indexOf(songName);
+		list.splice(index,1);
 		console.log('removed');
-		res.redirect('/');
-	}else{
-		return res.status(500).send('Error on delete');
-	}
+		res.end('removed');
+	});
 });
 
 app.get('/',(req,res) => {
