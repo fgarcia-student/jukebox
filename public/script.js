@@ -117,6 +117,8 @@ $(document).ready(() => {
 		updateCurrentSong();
 	});
 
+	console.log($('#currentSong'));
+
 	$('#remove').click(() => {
 		let remove = $('#select_song').val();
 		$.ajax({
