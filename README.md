@@ -27,7 +27,11 @@ INSTRUCTIONS:
 		--*songs/*
 
 
-3. Upload songs and play!
+3. run 'node server.js'
+
+4. navigate to 'localhost:3000'
+
+5. Upload songs and play!
 
 
 TODO:
