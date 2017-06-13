@@ -60,6 +60,7 @@ function Jukebox() {
 	}
 
 	this.previousSong = function() {
+		//previous song
 		$('#select_song > option:selected').prop({
 			'selected' : false
 		}).prev().prop({
