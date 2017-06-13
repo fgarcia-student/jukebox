@@ -95,6 +95,14 @@ $(document).ready(() => {
 		});
 	});
 
+	$('#remove').click(() => {
+		let remove = $('#select_song').val();
+		$.ajax({
+			type: 'DELETE',
+			url: `/delete?songName=${remove}`
+		})
+	});
+
 	$('#currentSong').on('loadedmetadata',() => {
 		jb.current_song_duration = $('#currentSong')[0].duration;
 		let sec = parseInt(jb.current_song_duration % 60);

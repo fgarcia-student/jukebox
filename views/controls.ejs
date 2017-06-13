@@ -4,6 +4,11 @@
 		<option> <%= list[i] %> </option>
 		<% } %>
 	</select>
+	<form ref='uploadForm' id='uploadForm' action='/upload' method='post' encType='multipart/form-data'>
+		<input type="file" name="uploadSong" />
+		<button id="upload">Upload Song</button>
+	</form>
+	<button id="remove">Remove Selected</button><br />
 	<button id="play">Play</button>
 	<button id="pause">Pause</button>
 	<button id="stop">Stop</button>
@@ -12,6 +17,7 @@
 	<button id="vol_up">Volume Up</button>
 	<button id="vol_down">Volume Down</button>
 	<input type="radio" name="rd" value="1" />Loop Song
-	<input type="radio" name="rd" value="9" />Loop Playlist<br />
+	<input type="radio" name="rd" value="9" />Loop Playlist
+	<br />
 	<span id="current">0:00</span>/<span id="duration">0:00</span>
 </div>
