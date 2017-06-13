@@ -11,12 +11,19 @@ INSTRUCTIONS:
 2. Create 'songs' folder inside of 'jukebox' folder
 	
 	ex. -'jukebox'
+		
 		--node_modules/
+		
 		--package.json
+		
 		--public/
+		
 		--README.md
+		
 		--server.js
+
 		--views/
+		
 		--*songs/*
 
 
