@@ -6,8 +6,10 @@ TODO:
 1. Style and Jukebox-ify!
 
 2. Only serve 1 MP3, overwrite when new song plays.
+
 	A. 'new.mp3' on client side will constantly update with
 		new song info, sent from server side
+
 		a. current method requires client to download all
 			songs on server.(Not efficient)
 
