@@ -91,7 +91,14 @@ function Jukebox() {
 	}
 
 	this.loop = function(value) {
-		//rewrite
+		let endOfSong = (this.current_song_time == this.current_song_duration);
+		if(endOfSong){
+			if(value == 1){
+				this.playSong();
+			}else if(value == 9){
+				this.nextSong();
+			}
+		}
 	}
 }
 
