@@ -124,6 +124,10 @@ $(document).ready(() => {
 			url: `/delete?songName=${remove}`,
 			success: function(res) {
 				window.location.href = '/';
+			},
+			error: function(err) {
+				console.log(err);
+				window.location.href = '/';
 			}
 		})
 	});

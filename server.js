@@ -20,8 +20,8 @@ fs.readdir('songs', (err,files) => {
 });	
 
 app.post('/upload', (req,res) => {
-	if(!req.files){
-		res.status(400).send('No files uploaded');
+	if(!req.files.uploadSong){
+		res.redirect('/');
 	}
 
 	let newSong = req.files.uploadSong;
