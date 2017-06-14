@@ -64,11 +64,11 @@ app.delete('/delete', (req,res) => {
 app.get('/',(req,res) => {
 	res.render('index',{
 		list: list || null,
-		songPath : list[0].src,
-		album: list[0].album,
-		year: list[0].year,
-		artist: list[0].artist,
-		song: list[0].title
+		songPath : list[0].src || null,
+		album: list[0].album || null,
+		year: list[0].year || null,
+		artist: list[0].artist || null,
+		song: list[0].title || null
 	});
 });
 
