@@ -1,12 +1,12 @@
 let express = require('express');
 let fileUpload = require('express-fileupload');
 let mm = require('musicmetadata');
+let _ = require('underscore');
 let fs = require('fs');
 let path = require('path');
 
 let app = express();
 let list = [];
-let details = [];
 
 app.set('view engine', 'ejs');
 app.set('views', './views');
@@ -16,25 +16,23 @@ app.use(express.static('songs'));
 app.use(fileUpload());
 
 
-
+let details = [];
 fs.readdir('songs', (err,files) => {
-	let title = '';
-	let artist = '';
-	let album = '';
-	let year = '';
 	files.forEach((file) => {
-		//TODO: fix metadata 
+		//TODO: fix metadata
+		let data = {} 
 		mm(fs.createReadStream('./songs/'+file), function(err,meta) {
 			s = {};
 			s.title = meta.title;
 			s.artist = meta.artist[0];
 			s.album = meta.album;
 			s.year = meta.year;
-			details.push(s);
+			data = _.clone(s);
 		});
-		list.push(file);
+		console.log(data);
+		// list.push(file);
+		// details.push(data);
 	});
-	console.log(details);
 });	
 
 app.post('/upload', (req,res) => {
