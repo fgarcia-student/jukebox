@@ -7,6 +7,7 @@ let path = require('path');
 
 let app = express();
 let list = [];
+let details = [];
 
 app.set('view engine', 'ejs');
 app.set('views', './views');
@@ -15,25 +16,20 @@ app.use(express.static('public'));
 app.use(express.static('songs'));
 app.use(fileUpload());
 
-
-let details = [];
 fs.readdir('songs', (err,files) => {
 	files.forEach((file) => {
 		//TODO: fix metadata
-		let data = {} 
-		mm(fs.createReadStream('./songs/'+file), function(err,meta) {
-			s = {};
+		mm(fs.createReadStream('./songs/'+file), (err,meta) => {
+			let s = {};
+			s.src = file;
 			s.title = meta.title;
 			s.artist = meta.artist[0];
 			s.album = meta.album;
 			s.year = meta.year;
-			data = _.clone(s);
+			list.push(s);
 		});
-		console.log(data);
-		// list.push(file);
-		// details.push(data);
 	});
-});	
+});
 
 app.post('/upload', (req,res) => {
 	if(!req.files.uploadSong){
@@ -68,10 +64,19 @@ app.delete('/delete', (req,res) => {
 app.get('/',(req,res) => {
 	res.render('index',{
 		list: list || null,
-		songPath : list[0]
+		songPath : list[0].src,
+		album: list[0].album,
+		year: list[0].year,
+		artist: list[0].artist,
+		song: list[0].title
 	});
+});
+
+app.get('/meta',(req,res) => {
+	let index = req.query.id;
+	res.send(list[index]);
 });
 
 app.listen('3000',() => {
 	console.log('listening on 3000');
-})
+});

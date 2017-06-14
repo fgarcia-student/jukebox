@@ -1,7 +1,7 @@
 <div id="controls">
 	<select id="select_song">
 		<% for(let i = 0; i< list.length; i++){ %>
-		<option> <%= list[i] %> </option>
+		<option value= <%= i %>> <%= list[i].src %> </option>
 		<% } %>
 	</select>
 	<form ref='uploadForm' id='uploadForm' action='/upload' method='post' encType='multipart/form-data'>

@@ -103,9 +103,19 @@ function Jukebox() {
 }
 
 function updateCurrentSong() {
-	$('#currentSong').attr({
-		'src' : $('#select_song').val()
-	});
+	index = $('#select_song').val();
+	$.ajax({
+		type: 'GET',
+		url: `/meta?id=${index}`,
+		success: function(result) {
+			$('#currentSong').attr('src',result.src);
+			$('#album_details').text(result.album);
+			$('#year_details').text(result.year);
+			$('#artist_details').text(result.artist);
+			$('#song_details').text(result.title);
+		}
+
+	})
 }
 
 
