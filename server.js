@@ -38,6 +38,13 @@ app.post('/upload', (req,res) => {
 	if(!req.files.uploadSong){
 		res.redirect('/');
 	}
+	if(list.length == 10){
+		//automatically remove first song
+		//max list size 10 ATM
+		songName = list[0].src;
+		fs.unlink(`./songs/${songName}`);
+		list.splice(0,1);
+	}
 
 	let newSong = req.files.uploadSong;
 	let newSongName = newSong.name;
