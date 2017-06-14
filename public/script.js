@@ -56,7 +56,9 @@ function Jukebox() {
 			'selected' : true
 		});
 		updateCurrentSong();
-		this.playSong();
+		setTimeout(() => {
+			this.playSong();
+		},500);	
 	}
 
 	this.previousSong = function() {
@@ -67,7 +69,9 @@ function Jukebox() {
 			'selected' : true
 		});
 		updateCurrentSong();
-		this.playSong();		
+		setTimeout(() => {
+			this.playSong();
+		},500);		
 	}
 
 	this.volUp = function() {
@@ -104,6 +108,7 @@ function Jukebox() {
 
 function updateCurrentSong() {
 	index = $('#select_song').val();
+	console.log(index);
 	$.ajax({
 		type: 'GET',
 		url: `/meta?id=${index}`,
