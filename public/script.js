@@ -136,9 +136,10 @@ $(document).ready(() => {
 
 	$('#remove').click(() => {
 		let remove = $('#select_song').val();
+		console.log(remove);
 		$.ajax({
 			type: 'DELETE',
-			url: `/delete?songName=${remove}`,
+			url: `/delete?id=${remove}`,
 			success: function(res) {
 				window.location.href = '/';
 			},
