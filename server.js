@@ -1,6 +1,9 @@
 let express = require('express');
 let fileUpload = require('express-fileupload');
+let readChunk = require('read-chunk');
+let fileType = require('file-type');
 let mm = require('musicmetadata');
+let multer = require('multer');
 let _ = require('underscore');
 let fs = require('fs');
 let path = require('path');
@@ -35,9 +38,11 @@ function updateSongs() {
 updateSongs();
 
 app.post('/upload', (req,res) => {
+	let valid = false;
 	if(!req.files.uploadSong){
 		res.redirect('/');
 	}
+	let newSong = req.files.uploadSong;
 	if(list.length == 10){
 		//automatically remove first song
 		//max list size 10 ATM
@@ -45,14 +50,20 @@ app.post('/upload', (req,res) => {
 		fs.unlink(`./songs/${songName}`);
 		list.splice(0,1);
 	}
+	let unique = Date.now();
+	let newSongName = unique + newSong.name;
 
-	let newSong = req.files.uploadSong;
-	let newSongName = newSong.name;
 	newSong.mv(`./songs/${newSongName}`, (err) => {
 		if(err){
 			return res.status(500).send(err);
 		}
-		mm(fs.createReadStream('./songs/'+newSongName), (err,meta) => {
+		let buffer = readChunk.sync(`./songs/${newSongName}`,0,262);
+		let realType = fileType(buffer);
+		if(realType.ext == 'mp3' || realType.ext == 'ogg'){
+			mm(fs.createReadStream(`./songs/${newSongName}`), (error,meta) => {
+				if(error){
+					res.status(500).redirect('/')
+				}
 				let s = {};
 				s.src = newSongName;
 				s.title = meta.title;
@@ -61,7 +72,11 @@ app.post('/upload', (req,res) => {
 				s.year = meta.year;
 				list.push(s);
 			});
-		console.log('added');
+			console.log('added');
+		}else{
+			fs.unlink(`./songs/${newSongName}`);
+			console.log('only mp3 or ogg allowed');
+		}
 		res.redirect('/');
 	});
 });

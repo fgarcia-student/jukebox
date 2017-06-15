@@ -114,10 +114,10 @@ function updateCurrentSong() {
 		url: `/meta?id=${index}`,
 		success: function(result) {
 			$('#currentSong').attr('src',result.src);
-			$('#album_details').text(result.album);
-			$('#year_details').text(result.year);
-			$('#artist_details').text(result.artist);
-			$('#song_details').text(result.title);
+			$('#album_details').text((result.album || ''));
+			$('#year_details').text((result.year || ''));
+			$('#artist_details').text((result.artist || ''));
+			$('#song_details').text((result.title || ''));
 		}
 
 	})
@@ -131,8 +131,6 @@ $(document).ready(() => {
 	$('#select_song').change(() => {
 		updateCurrentSong();
 	});
-
-	console.log($('#currentSong'));
 
 	$('#remove').click(() => {
 		let remove = $('#select_song').val();
