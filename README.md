@@ -4,7 +4,7 @@ Songs on server are shown to user. The user can choose songs to stream and liste
 
 INSTRUCTIONS:
 	
-	GO HERE >>>>> https://fgarcia-jukebox.herokuapp.com/
+GO HERE >>>>> https://fgarcia-jukebox.herokuapp.com/
 
 TODO:
 1. Style and Jukebox-ify!
