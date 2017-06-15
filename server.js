@@ -67,16 +67,20 @@ app.post('/upload', (req,res) => {
 });
 
 app.delete('/delete', (req,res) => {
-	let id = req.query.id;
-	songName = list[id].src;
-	fs.unlink(`./songs/${songName}`,(err) => {
-		if(err){
-			return res.status(500).send(err);
-		}
-		list.splice(id,1);
-		console.log('removed');
-		res.end('removed');
-	});
+	if(list.length >= 2){
+		let id = req.query.id;
+		songName = list[id].src;
+		fs.unlink(`./songs/${songName}`,(err) => {
+			if(err){
+				return res.status(500).send(err);
+			}
+			list.splice(id,1);
+			console.log('removed');
+			res.end('removed');
+		});
+	}else{
+		res.redirect('/');
+	}
 });
 
 app.get('/',(req,res) => {
