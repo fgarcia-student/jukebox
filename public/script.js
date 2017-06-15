@@ -58,7 +58,7 @@ function Jukebox() {
 		updateCurrentSong();
 		setTimeout(() => {
 			this.playSong();
-		},500);	
+		},250);	
 	}
 
 	this.previousSong = function() {
@@ -71,7 +71,7 @@ function Jukebox() {
 		updateCurrentSong();
 		setTimeout(() => {
 			this.playSong();
-		},500);		
+		},250);		
 	}
 
 	this.volUp = function() {
