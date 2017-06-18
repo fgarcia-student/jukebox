@@ -48,13 +48,10 @@ body{
 		left: 0;
 		width: 80%;
 		height: 5%;
-		background-color: #465362;
-		color: #011936;
-	}
-
-	#album_details, #artist_details, #song_details {
 		overflow-x: hidden;
 		overflow-y: hidden;
+		background-color: #465362;
+		color: #011936;
 	}
 
 	#controls *{
