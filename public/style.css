@@ -91,7 +91,7 @@ body{
 		top: 0;
 		right: 0;
 		width: 20%;
-		height: 3%;
+		height: 5%;
 		background-color: #F4FFFD;
 		color: #011936;
 	}
@@ -101,7 +101,7 @@ body{
 		top: 0;
 		left: 0;
 		width: 80%;
-		height: 3%;
+		height: 5%;
 		overflow-x: hidden;
 		overflow-y: hidden;
 		background-color: #465362;
@@ -121,7 +121,7 @@ body{
 		position: absolute;
 		bottom: 0;
 		right: 0;
-		height: 97%;
+		height: 95%;
 		width: 20%;
 	}
 
