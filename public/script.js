@@ -1,21 +1,16 @@
 function Jukebox() {
 	// play,pause,next,previous,increase_volume,decrease_volume,add_song,remove_song,stop,pick----methods
 	// songs[array],current_song_index,volume,status{WAITING,PLAYING,PAUSED} ---state 
-	const MIN_VOLUME = 0; // min
-	const DEFAULT_VOLUME = .5; // out of 1
-	const MAX_VOLUME = 1; // max
 	const STATUS = ["WAITING","PLAYING","PAUSED"];
 
 	this.current_song_time = 0;
 	this.current_song_duration = 0;
-	this.volume = DEFAULT_VOLUME;
 	this.status = STATUS[0];
 
 	this.playSong = function() {
 		// play song indicated by user
 		// set current song index to index of this song
 		if(this.status == STATUS[0]){ //WAITING
-			$('#currentSong').prop('volume',this.volume);
 			$('#currentSong').trigger('play'); 
 			// update status 
 			this.status = STATUS[1]; // PLAYING
@@ -72,26 +67,6 @@ function Jukebox() {
 		setTimeout(() => {
 			this.playSong();
 		},500);		
-	}
-
-	this.volUp = function() {
-		if((this.volume+.1) >= MAX_VOLUME){
-			this.volume = MAX_VOLUME;
-		}else{
-			$('#currentSong').prop("volume",this.volume);
-			this.volume += .10;
-		}
-		console.log(this.volume);
-	}
-
-	this.volDown = function() {
-		if((this.volume-.1) <= MIN_VOLUME){
-			this.volume = MIN_VOLUME;
-		}else{
-			$('#currentSong').prop("volume",this.volume);
-			this.volume -= .10;
-		}
-		console.log(this.volume);
 	}
 
 	this.loop = function(value) {
@@ -152,6 +127,7 @@ function detailsSlide() {
 $(document).ready(() => {
 
 	let jb = new Jukebox();
+	let playing = false;
 
 	setInterval(() => {
 		detailsSlide();
@@ -200,24 +176,22 @@ $(document).ready(() => {
 		jb.loop($('input[name="rd"]:checked').val());
 	});
 
-	$('#vol_up').click(() => {
-		jb.volUp();
-	});
-
-	$('#vol_down').click(() => {
-		jb.volDown();
-	});
-
 	$('#play').click(() => {
-		jb.playSong();
-	});
-
-	$('#pause').click(() => {
-		jb.pauseSong();
+		if(playing){
+			jb.pauseSong();
+			playing = false;
+			$('#play').text('Play');
+		}else{
+			jb.playSong();
+			playing = true;
+			$('#play').text('Pause');
+		}
 	});
 
 	$('#stop').click(() => {
 		jb.stopSong();
+		playing = false;
+		$('#play').text('Play');
 	});
 
 	$('#next').click(() => {

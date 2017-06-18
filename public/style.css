@@ -5,17 +5,67 @@ body{
 	color: white;
 }
 
-@media screen and (min-width: 426px) and () {
-
+#jukebox {
+	position: relative;
+	height: 100vh;
 }
 
-@media screen and (min-width: 320px) and (max-width: 425px){
-	#jukebox {
+@media screen and (min-width: 769px){
+
+	#jukebox_bg {
 		position: relative;
-		height: 100vh;
+		float: left;
+		width: 50%;
+		height: 100%;
+	}
+
+	#controls {
+		position: relative;
+		float: left;
+		background-color: #ED254E;
+		color: #F4FFFD;
+		height: 25%;
+		width: 50%;
+	}
+
+	#play, #stop, #next, #previous {
+		display: block;
+		float: left;
+		border: none;
+		width: 25%;
+	}
+
+	#details {
+		position: relative;
+		float: left;
+		background-color: #F9DC5C;
+		color: #011936;
+		height: 25%;
+		width: 50%;
+	}
+
+	#div_upload {
+		position: relative;
+		float: left;
+		background-color: #F4FFFD;
+		color: #011936;
+		height: 25%;
+		width: 50%;
+	}
+
+	#select {
+		position: relative;
+		float: left;
+		background-color: #465362;
+		color: #F4FFFD;
+		height: 25%;
+		width: 50%;
 	}
 
 
+}
+
+@media screen and (min-width: 320px) and (max-width: 768px){
 	#select_song {
 		display: none;
 	}
@@ -24,7 +74,7 @@ body{
 		position: absolute;
 		top: 3%;
 		width: 80%;
-		height: 92%;
+		height: 95%;
 	}
 
 	#div_upload {
@@ -75,8 +125,23 @@ body{
 		width: 20%;
 	}
 
-	#ctrls {
+	#play, #stop, #next, #previous {
 		position: absolute;
+		border: none;
+		height: 10%;
+	}
+
+	#play {
+		bottom: 30%;
+	}
+
+	#stop {
+		bottom: 20%;
+	}
+	#next {
+		bottom: 10%;
+	}
+	#previous {
 		bottom: 0;
 	}
 }
