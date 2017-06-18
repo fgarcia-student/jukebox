@@ -196,9 +196,13 @@ $(document).ready(() => {
 
 	$('#next').click(() => {
 		jb.nextSong();
+		playing = true;
+		$('#play').text('Pause');
 	});
 
 	$('#previous').click(() => {
 		jb.previousSong();
+		playing = true;
+		$('#play').text('Pause');
 	});
 });
