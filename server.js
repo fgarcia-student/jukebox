@@ -27,6 +27,11 @@ function updateSongs() {
 				s.artist = meta.artist[0];
 				s.album = meta.album;
 				s.year = meta.year;
+				if(typeof meta.picture[0] == 'undefined'){
+					s.img = 'http://playercdn.listenlive.co/templates/StandardPlayerV4/webroot/img/default-cover-art.png';
+				}else{
+					s.img = ('data:image/jpeg;base64, ' + meta.picture[0].data.toString('base64'));
+				}
 				list.push(s);
 			});
 		});
