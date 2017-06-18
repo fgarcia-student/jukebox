@@ -48,6 +48,7 @@ body{
 		left: 0;
 		width: 80%;
 		overflow-x: hidden;
+		overflow-y: hidden;
 		height: 5%;
 		background-color: #465362;
 		color: #011936;
