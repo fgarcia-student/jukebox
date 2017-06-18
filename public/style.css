@@ -1,8 +1,77 @@
 body{
+	margin: 0;
+	padding: 0;
 	background-color: black;
 	color: white;
 }
 
-#uploadForm {
-	display: inline;
+@media screen and (min-width: 320px) and (max-width: 425px){
+	#jukebox {
+		position: relative;
+		height: 100vh;
+	}
+
+
+	#select_song {
+		display: none;
+	}
+
+	#jukebox_bg {
+		position: absolute;
+		top: 5%;
+		width: 80%;
+		height: 86%;
+	}
+
+	#div_upload {
+		position: absolute;
+		left: 0;
+		bottom: 0;
+		width: 80%;
+		background-color: #F9DC5C;
+		color: #011936;
+	}
+
+	#time {
+		position: absolute;
+		top: 0;
+		right: 0;
+		width: 20%;
+		height: 5%;
+		background-color: #F4FFFD;
+		color: #011936;
+	}
+
+	#album,#artist,#year,#song {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 80%;
+		overflow-x: hidden;
+		height: 5%;
+		background-color: #465362;
+		color: #011936;
+	}
+
+	#controls *{
+		display: block;
+		margin:0 auto;
+		text-align: center;
+		width: 100%;
+	}
+
+	#controls {
+		background-color: #ED254E;
+		color: #F4FFFD;
+		position: absolute;
+		bottom: 0;
+		right: 0;
+		height: 95%;
+		width: 20%;
+	}
+
+	#ctrls {
+		position: absolute;
+		bottom: 0;
+	}
 }

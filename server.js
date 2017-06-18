@@ -3,8 +3,6 @@ let fileUpload = require('express-fileupload');
 let readChunk = require('read-chunk');
 let fileType = require('file-type');
 let mm = require('musicmetadata');
-let multer = require('multer');
-let _ = require('underscore');
 let fs = require('fs');
 let path = require('path');
 
@@ -70,6 +68,12 @@ app.post('/upload', (req,res) => {
 				s.artist = meta.artist[0];
 				s.album = meta.album;
 				s.year = meta.year;
+				console.log(meta.picture[0]);
+				if(typeof meta.picture[0] == 'undefined'){
+					s.img = 'http://playercdn.listenlive.co/templates/StandardPlayerV4/webroot/img/default-cover-art.png';
+				}else{
+					s.img = ('data:image/jpeg;base64, ' + meta.picture[0].data.toString('base64'));
+				}
 				list.push(s);
 			});
 			console.log('added');
@@ -99,14 +103,14 @@ app.delete('/delete', (req,res) => {
 });
 
 app.get('/',(req,res) => {
-	console.log(list);
 	res.render('index',{
 		list: list || null,
 		songPath : list[0].src || null,
 		album: list[0].album || null,
 		year: list[0].year || null,
 		artist: list[0].artist || null,
-		song: list[0].title || null
+		song: list[0].title || null,
+		image: list[0].img || null
 	});
 });
 

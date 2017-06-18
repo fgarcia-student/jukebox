@@ -1,23 +1,21 @@
 <div id="controls">
-	<select id="select_song">
-		<% for(let i = 0; i< list.length; i++){ %>
-		<option value= <%= i %>> <%= list[i].src %> </option>
-		<% } %>
-	</select>
-	<form ref='uploadForm' id='uploadForm' action='/upload' method='post' encType='multipart/form-data'>
-		<input id="uploadSong" type="file" name="uploadSong" />
-		<button id="upload">Upload Song</button>
-	</form>
-	<button id="remove">Remove Selected</button><br />
-	<button id="play">Play</button>
-	<button id="pause">Pause</button>
-	<button id="stop">Stop</button>
-	<button id="next">Next</button>
-	<button id="previous">Previous</button>
-	<button id="vol_up">Volume Up</button>
-	<button id="vol_down">Volume Down</button>
-	<input type="radio" name="rd" value="1" />Loop Song
-	<input type="radio" name="rd" value="9" />Loop Playlist
-	<br />
-	<span id="current">0:00</span>/<span id="duration">0:00</span>
+	<div id="ctrls">
+		<div id="loop_controls">
+			<label id="lbl_loop1">
+			Loop Song
+			<input id="loop1" type="radio" name="rd" value="1" />
+			</label>
+			<label id="lbl_loop9">
+			Loop Playlist
+			<input id="loop9" type="radio" name="rd" value="9" />
+			</label>
+		</div>
+		<button id="play">Play</button>
+		<button id="pause">Pause</button>
+		<button id="stop">Stop</button>
+		<button id="next">Next</button>
+		<button id="previous">Previous</button>
+		<button id="vol_up">Volume Up</button>
+		<button id="vol_down">Volume Down</button>
+	</div>
 </div>

@@ -113,20 +113,51 @@ function updateCurrentSong() {
 		type: 'GET',
 		url: `/meta?id=${index}`,
 		success: function(result) {
+			if(result.img){
+				$('#jukebox_bg').attr('src', result.img);
+			}else{
+				$('#jukebox_bg').attr('src', null);
+			}
 			$('#currentSong').attr('src',result.src);
-			$('#album_details').text((result.album || ''));
-			$('#year_details').text((result.year || ''));
-			$('#artist_details').text((result.artist || ''));
-			$('#song_details').text((result.title || ''));
+			$('#album_details').text((result.album || 'Unknown'));
+			$('#year_details').text((result.year || 'Unknown'));
+			$('#artist_details').text((result.artist || 'Unknown'));
+			$('#song_details').text((result.title || result.src));
 		}
 
 	})
 }
-
+function detailsSlide() {
+	$('#song').show();
+	$('#artist').hide();
+	$('#album').hide();
+	$('#year').hide();
+	setTimeout(() => {
+		$('#song').hide();
+		$('#artist').show();
+	},2000);
+	setTimeout(() => {
+		$('#artist').hide();
+		$('#album').show();
+	},4000);
+	setTimeout(() => {
+		$('#album').hide();
+		$('#year').show();
+	},6000);
+	setTimeout(() => {
+		$('#year').hide();
+	},8000);
+}
 
 $(document).ready(() => {
 
 	let jb = new Jukebox();
+
+	setInterval(() => {
+		detailsSlide();
+	},8000);
+
+	updateCurrentSong();
 
 	$('#select_song').change(() => {
 		updateCurrentSong();
